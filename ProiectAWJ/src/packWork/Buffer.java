@@ -2,12 +2,12 @@ package packWork;
 
 import java.awt.image.BufferedImage;
 
-public class Buffer {
+public class Buffer extends AbstractBuffer{
 	// Avem un vector de BuffredImages deoarece consumer-ul are nevoie de cate doua imagini
 	// Avem un vector de stari de available deoarece vrem sa stim cand sunt ambele imagini disponibile
-	BufferedImage[] images;
-	boolean[] availableStates;
-	int nrOfImages;
+	private BufferedImage[] images;
+	private boolean[] availableStates;
+	private int nrOfImages;
 	
 	// Acest constructor initializeaza vectorii si seteaza starile initiale cu false, deoarece nu este nimic disponibil
 	public Buffer(int nrOfImages){
@@ -20,6 +20,7 @@ public class Buffer {
 	
 	// Functie sincronizata ce returneaza catre consumator vectorul de imagini si face starile de disponibilitate false, 
 	// deoarece se presupune ca nu mai sunt disponibile
+	@Override
 	public synchronized BufferedImage[] GetImages(){
 		while(!getAvailable()){
 			try{
@@ -35,6 +36,7 @@ public class Buffer {
 	}
 	
 	// Functie sincronizata ce pune pe rand cate o imagine in vector, pana au fost puse toate si pot fi primite de catre consumator
+	@Override
 	public synchronized void put(BufferedImage image, int currentImage){
 		while(availableStates[currentImage]){
 			try{

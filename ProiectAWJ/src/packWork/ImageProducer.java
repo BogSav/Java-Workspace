@@ -7,8 +7,8 @@ public class ImageProducer extends ThreadedImage implements Runnable{
 	private int producerID;
 	
 	// In acest constructor cream un thread nou, apelam constructorul parent class-ului si setam un ID pentru instanta curenta
-	public ImageProducer(String fileName, int width, int height, Buffer buffer){
-		super(fileName, width, height, buffer);
+	public ImageProducer(String path, int width, int height, Buffer buffer){
+		super(path, width, height, buffer);
 		
 		producerID = nrOfProducers;
 		nrOfProducers++;
